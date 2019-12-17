@@ -21,6 +21,8 @@
 <?php $i++;}?>
 
 <input id="page_num" value="1" style="display: none;">
+<input id="max_page_num" value="<?php echo count($result);?>" style="display: none;">
+
 <button id="up">上一页</button>
 <button id="down">下一页</button>
 
@@ -31,6 +33,7 @@
 
 		if(page_num < 1){
 			page_num = 1;
+			alert('已经是第一页了');
 		}
 
 		$("#page_num").val(page_num);
@@ -40,6 +43,12 @@
 	$("#down").click(function(){
 		var page_num = $("#page_num").val();
 		page_num++;
+
+		if(page_num > $("#max_page_num").val()){
+			page_num = $("#max_page_num").val();
+			alert('已经是最后一页');
+		}
+
 		$("#page_num").val(page_num);
 		$(".data_page").hide();
 		$("#data_"+page_num).show();
